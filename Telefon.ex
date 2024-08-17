@@ -16,8 +16,8 @@ defmodule Telefon do
 		{key, elem(value, 0)}
 	end
 
-	def book_from_file(name) do
-		text = File.read!("./#{name}")
+	def book_from_file(name, path \\ "./") do
+		text = File.read!(path <> name)
 		lines = String.split(text, "\n")
 		records = lines |> Enum.map(fn line -> String.split(line, " ") end) |> Enum.map(&(convert(&1)))
 		Enum.reduce(records, %{}, fn record, acc -> update(record, acc) end) #book
